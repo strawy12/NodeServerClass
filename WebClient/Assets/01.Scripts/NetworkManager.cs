@@ -35,7 +35,7 @@ public class NetworkManager : MonoBehaviour
 
     private void Start()
     {
-        GetImageList();
+       // GetImageList();
     }
 
     private void GetImage(string filename)
@@ -114,6 +114,7 @@ public class NetworkManager : MonoBehaviour
             Button button = Instantiate(_imageButtonTemp, _imageButtonTemp.transform.parent);
             button.name = $"{_imageList.list[i]}_Btn";
             string filename = _imageList.list[i];
+
             button.onClick.AddListener(() => GetImage(filename));
             Text btnText = button.transform.Find("Text").GetComponent<Text>();
             btnText.text = _imageList.list[i];

@@ -1,7 +1,9 @@
 import http from 'http';
-import Express, {Application, Request,Response} from 'express';
+import Express, {Application, request, Request,Response} from 'express';
 import path from 'path';
 import fs from 'fs';
+import { Pool, ScoreVO } from './DB';
+import { FieldPacket, ResultSetHeader, RowDataPacket } from 'mysql2';
 
 const data = {
     name: "방과후 데이터",
@@ -14,10 +16,30 @@ const data = {
 
 const app : Application = Express();
 
+app.use(Express.json()); // 들어오는 post 데이터를 json 으로 변환 해줘서 body에 넣어줌
+app.use(Express.urlencoded({extended:true})); // 한글 때문에 사용
 
 app.get("/", (req: Request, res: Response) =>
 {
     res.json(data);
+});
+
+app.post("/insert", async (req:Request,res:Response)=>
+{
+    const {score, username} = req.body;
+
+    
+    let [result, info] : [ResultSetHeader, FieldPacket[]] = await Pool.query(`INSERT INTO scores (score, username, time) VALUES (?, ?, NOW())`, [score, username]);
+
+    res.json({msg: "성공적으로 기록 완료", insertId: result.insertId});
+});
+
+app.get("/record", async (req:Request, res:Response) =>
+{
+    const sql = `SELECT * FROM scores ORDER BY score DESC LIMIT 0,5`;
+    let[rows,fieldInfos]: [ScoreVO[], FieldPacket[]] = await Pool.query(sql);
+
+    res.json({msg:'data list', count: rows.length, data:rows});
 });
 
 app.get("/image/:filename", (req: Request, res: Response) =>
