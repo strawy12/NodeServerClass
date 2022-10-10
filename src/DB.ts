@@ -18,4 +18,11 @@ export interface ScoreVO extends RowDataPacket
     time:Date
 }
 
+export interface InventoryVO extends RowDataPacket
+{
+    id:number,
+    user_id:number,
+    json:string
+}
+
 export const Pool : MySQL.Pool = MySQL.createPool(poolOption);

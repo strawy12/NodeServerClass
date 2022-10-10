@@ -2,7 +2,7 @@ import http from 'http';
 import Express, {Application, request, Request,Response} from 'express';
 import path from 'path';
 import fs from 'fs';
-import { Pool, ScoreVO } from './DB';
+import { Pool, ScoreVO, InventoryVO } from './DB';
 import { FieldPacket, ResultSetHeader, RowDataPacket } from 'mysql2';
 
 const data = {
@@ -24,23 +24,43 @@ app.get("/", (req: Request, res: Response) =>
     res.json(data);
 });
 
-app.post("/insert", async (req:Request,res:Response)=>
+app.post("/insert/inventories", async (req:Request,res:Response)=>
+{
+    const {user_id, json} = req.body;
+   
+    let [result, info] : [ResultSetHeader, FieldPacket[]] = await Pool.query(`UPDATE inventories SET user_id=?,json=? where id=1`, [user_id, json]);
+    res.json({msg: "성공적으로 기록 완료", insertId: result.insertId});
+});
+
+
+
+app.get("/record/inventories", async (req:Request, res:Response) =>
+{
+    const sql = `SELECT * FROM inventories`;
+    let[rows,fieldInfos]: [InventoryVO[], FieldPacket[]] = await Pool.query(sql);
+
+    res.json({msg:'data list', data:rows});
+});
+
+app.post("/insert/scores", async (req:Request,res:Response)=>
 {
     const {score, username} = req.body;
 
     
     let [result, info] : [ResultSetHeader, FieldPacket[]] = await Pool.query(`INSERT INTO scores (score, username, time) VALUES (?, ?, NOW())`, [score, username]);
-
     res.json({msg: "성공적으로 기록 완료", insertId: result.insertId});
 });
 
-app.get("/record", async (req:Request, res:Response) =>
+app.get("/record/scores", async (req:Request, res:Response) =>
 {
     const sql = `SELECT * FROM scores ORDER BY score DESC LIMIT 0,5`;
     let[rows,fieldInfos]: [ScoreVO[], FieldPacket[]] = await Pool.query(sql);
 
     res.json({msg:'data list', count: rows.length, data:rows});
 });
+
+
+
 
 app.get("/image/:filename", (req: Request, res: Response) =>
 {

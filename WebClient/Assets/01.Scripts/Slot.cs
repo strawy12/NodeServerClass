@@ -19,6 +19,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IDropHandler, IPointerE
         _rect = GetComponent<RectTransform>();
     }
 
+
     public void SetItem(GameObject target)
     {
         _hasItem = true;
@@ -27,9 +28,12 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IDropHandler, IPointerE
         target.transform.SetParent(transform);
         target.GetComponent<RectTransform>().position = _rect.position;
 
-        Slot slot = _slotItem.prevParent.GetComponent<Slot>();
+        if(_slotItem.prevParent != null)
+        {
+            Slot slot = _slotItem.prevParent.GetComponent<Slot>();
 
-        slot?.RemveItem();
+            slot?.RemveItem();
+        }
     }
 
     public void RemveItem()
