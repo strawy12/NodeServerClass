@@ -9,9 +9,13 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IDropHandler, IPointerE
     private Image _image;
     private RectTransform _rect;
     private bool _hasItem = false;
-    private ItemUI _slotItem;
+
+    public ItemUI slotItem;
     public int slotNumber = 0; 
-    public ItemSO SlotItem => _slotItem != null ? _slotItem._item : null;
+    public ItemSO SlotItem
+    {
+        get => slotItem != null ? slotItem.Item : null;
+    } 
 
     private void Awake()
     {
@@ -20,36 +24,33 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IDropHandler, IPointerE
     }
 
 
-    public void SetItem(GameObject target)
-    {
-        _hasItem = true;
-        _slotItem = target.GetComponent<ItemUI>();
 
-        target.transform.SetParent(transform);
-        target.GetComponent<RectTransform>().position = _rect.position;
-
-        if(_slotItem.prevParent != null)
-        {
-            Slot slot = _slotItem.prevParent.GetComponent<Slot>();
-
-            slot?.RemveItem();
-        }
-    }
 
     public void RemveItem()
     {
         _hasItem = false;
-        _slotItem = null;
+        slotItem = null;
+    }
+    public void SetItem(ItemUI item)
+    {
+        slotItem = item;
+        _hasItem = true;
+        slotItem.SetData(transform, _rect.position);
     }
 
     public void OnDrop(PointerEventData eventData)
     {
         _image.color = Color.white;
 
+
         if (eventData.pointerDrag != null && _hasItem == false)
         {
-            SetItem(eventData.pointerDrag);
+            GameObject target = eventData.pointerDrag;
 
+            slotItem = target.GetComponent<ItemUI>();
+            if (slotItem == null) return;
+            slotItem.SetData(transform, _rect.position);
+            _hasItem = true;
         }
     }
 

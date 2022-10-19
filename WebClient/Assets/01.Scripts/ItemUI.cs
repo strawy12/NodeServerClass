@@ -13,7 +13,18 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     private Vector3 _prevPos;
 
     private Image _image;
-    public ItemSO _item;
+    [SerializeField]
+    private ItemSO _item;
+
+    public ItemSO Item
+    {
+        get => _item;
+        set
+        {
+            _item = value;
+            LoadSprite();
+        }
+    }
 
     private void Awake()
     {
@@ -23,8 +34,37 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         _image = GetComponent<Image>();
     }
 
+    public void SetData(Transform parent, Vector3 rectPos)
+    {
+        transform.SetParent(parent);
+        _rect.position = rectPos;
+
+        // 이전에 만약에 슬롯에 있었다면 이전 슬롯에서 이녀석을 존재했음을 제거
+        if (prevParent != null)
+        {
+            Slot slot = prevParent.GetComponent<Slot>();
+            if (slot != null)
+            {
+                slot.RemveItem();
+            }
+        }
+
+
+    }
+
     private void Start()
     {
+        LoadSprite();
+    }
+
+
+    private async void LoadSprite()
+    {
+        if (_item.sprite == null)
+        {
+            _item.sprite = await _item._assetSprite.LoadAssetAsync().Task;
+        }
+
         _image.sprite = _item.sprite;
     }
 
@@ -47,7 +87,7 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if(transform.parent == _canvas)
+        if (transform.parent == _canvas)
         {
             transform.SetParent(prevParent);
             _rect.position = _prevPos;

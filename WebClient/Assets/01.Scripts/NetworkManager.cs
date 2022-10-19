@@ -35,7 +35,7 @@ public class NetworkManager : MonoBehaviour
 
     private void Start()
     {
-       // GetImageList();
+       GetImageList();
     }
 
     private void GetImage(string filename)

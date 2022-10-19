@@ -25,4 +25,12 @@ export interface InventoryVO extends RowDataPacket
     json:string
 }
 
+export interface UserVO extends RowDataPacket
+{
+    id:number,
+    account:string,
+    name:string,
+    pass:string
+}
+
 export const Pool : MySQL.Pool = MySQL.createPool(poolOption);
