@@ -20,9 +20,15 @@ MonoBehaviour:
   - m_GUID: a3cf1599f325b8742854ce77f3112ab8
     m_Address: ammo
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Texture
   - m_GUID: 12853bdf39fd15e4881d2a4bb8812d99
     m_Address: slime
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Texture
+  - m_GUID: 3e7677cb1cf6f6e4c9fae8f16870cbe9
+    m_Address: Inventory_style_03c
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
