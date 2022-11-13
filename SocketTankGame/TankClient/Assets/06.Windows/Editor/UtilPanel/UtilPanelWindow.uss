@@ -1,0 +1,29 @@
+#menu-box{
+	display:flex;
+	flex-direction:row;
+	justify-content:space-between;
+}
+
+#menu-box > Button
+{
+	font-size:25px;
+	flex:1;
+}
+/*
+#generate-map
+{
+	flex:2;
+}
+
+#generate-map:hover
+{
+	background-color:#f00;
+}
+
+
+#build-player
+{
+	flex:2;
+}
+
+*/

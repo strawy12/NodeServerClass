@@ -27,24 +27,4 @@ public class GameManager : MonoBehaviour
         NetworkManager.Instance.Disconnect();
     }
 
-    public void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Vector3 pos = Input.mousePosition;
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint(pos);
-            worldPos.z = 0;
-
-            Vector3Int tilePos = MapManager.Instance.GetTilePos(worldPos);
-            MapCategory mc = MapManager.Instance.GetTileCategory(tilePos);
-
-            Debug.Log(tilePos);
-            Debug.Log(mc);
-
-            C_Pos cPos = new C_Pos { X = tilePos.x, Y = tilePos.y };
-
-            NetworkManager.Instance.RegisterSend((ushort)MSGID.CPos, cPos);
-
-        }
-    }
 }

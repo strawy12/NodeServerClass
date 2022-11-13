@@ -24,6 +24,8 @@ export default class MapManager
     yMin:number = 0;
     yMax:number = 0;
 
+    spawnList: tankio.Position[] = [];
+
     constructor(filePath:string)
     {
         let fileText:string = FS.readFileSync(filePath, "utf8");
@@ -33,6 +35,7 @@ export default class MapManager
         this.xMax = parseInt(line[1]);
         this.yMin = parseInt(line[2]);
         this.yMax = parseInt(line[3]);
+
 
         line = line.splice(4);
         let lineCount:number = Math.abs(this.yMin) + Math.abs(this.yMax);
@@ -44,6 +47,13 @@ export default class MapManager
         }
 
         this.mapData = this.mapData.reverse();
+
+        this.spawnList.push(
+            new tankio.Position({x:-11,y:10}),
+            new tankio.Position({x:11,y:10}),
+            new tankio.Position({x:11,y:-10}),
+            new tankio.Position({x:-11,y:-10}),
+        );
     }
 
     getMapData(x:number, y:number) : MapCategory
@@ -52,5 +62,13 @@ export default class MapManager
         y += Math.abs(this.yMin);
 
         return this.mapData[y][x];
+    }
+
+    getRandomSafePosition() : tankio.Position
+    {
+        let idx:number = Math.floor(Math.random() * 4);  
+        let pos = this.spawnList[idx];
+
+        return pos;
     }
 }

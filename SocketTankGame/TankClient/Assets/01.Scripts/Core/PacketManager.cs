@@ -23,8 +23,8 @@ public class PacketManager
 
     private void Register()
     {
-        _OnRecv.Add((ushort)MSGID.SPos, MakePacket<S_Pos>);
-        _Handlers.Add((ushort)MSGID.SPos, new SPosHandler());
+        //_OnRecv.Add((ushort)MSGID.SPos, MakePacket<S_Pos>);
+        //_Handlers.Add((ushort)MSGID.SPos, new SPosHandler());
     }
 
     public IPacketHandler GetPacketHandler(ushort id)

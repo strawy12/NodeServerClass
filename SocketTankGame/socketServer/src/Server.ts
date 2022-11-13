@@ -4,15 +4,14 @@ import WS, { RawData } from 'ws';
 import { tankio } from './packet/packet';
 import Path from 'path';
 import MapManager from "./MapManager";
+import PacketManager from "./PacketManager";
+import SocketSession from "./socketSession";
+import SessionManager from "./SessionManager";
 
 
 const App: Application = Express();
 
-MapManager.Instance = new MapManager(Path.join(__dirname, "Tilemap.txt"));
-
-const httpServer = App.listen(50000, () => {
-    console.log("Server is running on 50000 port");
-});
+const httpServer = App.listen(50000);
 
 
 const socketServer: WS.Server = new WS.Server({
@@ -20,20 +19,37 @@ const socketServer: WS.Server = new WS.Server({
     //port:50000
 });
 
+console.log("Socket Server is running on 50000 port");
+
+PacketManager.Instance = new PacketManager();
+MapManager.Instance = new MapManager(Path.join(__dirname, "Tilemap.txt"));
+SessionManager.Instance = new SessionManager();
+
+let playerID:number = 1;
+
 socketServer.on("connection", (soc: WS.WebSocket, req: IncomingMessage) => {
 
+    const id:number = playerID;
+    const ip:string = req.connection.remoteAddress as string;
+    let session :SocketSession = new SocketSession(soc, ip, id, () => 
+    {
+        SessionManager.Instance.removeSession(id);
+    }); 
+
+    SessionManager.Instance.addSession(session, id);
+    console.log(`${ip}에서 ${id} 플레이어 접속함`);
+
+    let spawnPos:tankio.Position = MapManager.Instance.getRandomSafePosition();
+    let welcomeMsg = new tankio.S_init({playerId:id, spawnPosition:spawnPos});
+    session.sendData(welcomeMsg.serialize(), tankio.MSGID.S_INIT);
+
+    playerID++;
+
     soc.on("message", (data: RawData, isBinary: boolean) => {
-
-
-        let length: number = (data.slice(0, 2) as Buffer).readInt16LE();
-        let code: number = (data.slice(2, 4) as Buffer).readInt16LE();
-        let payload = data.slice(4) as Buffer; // 4부터 끝까지 잘라내기
-
-        console.log(code);
-        if (code == tankio.MSGID.C_POS) {
-            let cPos:tankio.C_Pos = tankio.C_Pos.deserialize(payload); 
-            console.log(cPos.x, cPos.y);
-        }
+        
+        if(isBinary)
+            session.recieveMsg(data);
     });
+
 
 });

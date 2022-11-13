@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.WebSockets;
 using System.Threading;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class NetworkManager : MonoBehaviour
@@ -89,8 +88,6 @@ public class NetworkManager : MonoBehaviour
 
                 ArraySegment<byte> segment = new ArraySegment<byte>(sendBuffer, 0, len+4);
                 await _socket.SendAsync(segment, WebSocketMessageType.Binary, true, CancellationToken.None);
-
-               
             }
 
             _isReadyToSend = true;
@@ -116,7 +113,7 @@ public class NetworkManager : MonoBehaviour
 
         catch (Exception e)
         {
-            Debug.LogError("Connection Error : check server sttatus... " + e.Message);
+            Debug.LogError("Connection Error : check server status... " + e.Message);
         }
     }
 
