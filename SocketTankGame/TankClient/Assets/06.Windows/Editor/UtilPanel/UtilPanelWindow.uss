@@ -9,6 +9,18 @@
 	font-size:25px;
 	flex:1;
 }
+
+#build-box{
+	display:flex;
+	flex-direction:row;
+	justify-content:space-between;
+}
+
+#build-box > SliderInt
+{
+	font-size:21px;
+	flex:1;
+}
 /*
 #generate-map
 {

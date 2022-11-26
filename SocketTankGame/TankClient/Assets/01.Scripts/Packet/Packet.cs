@@ -28,7 +28,7 @@ namespace GGM.Proto.Tank {
             "ASABKAISCQoBeBgCIAEoAhIJCgF5GAMgASgCEhQKDHR1cnJldFJvdGF0ZRgE",
             "IAEoAiJQCgpQbGF5ZXJJbmZvEhAKCHBsYXllcklkGAEgASgFEgwKBG5hbWUY",
             "AiABKAkSIgoIcG9zaXRpb24YAyABKAsyEC50YW5raW8uUG9zaXRpb24iQwoG",
-            "U19pbml0EhAKCHBsYXllcklkGAEgASgFEicKDXNwYXduUG9zaXRpb24YAiAB",
+            "U19Jbml0EhAKCHBsYXllcklkGAEgASgFEicKDXNwYXduUG9zaXRpb24YAiAB",
             "KAsyEC50YW5raW8uUG9zaXRpb24iOwoHQ19FbnRlchIMCgRuYW1lGAEgASgJ",
             "EiIKCHBvc2l0aW9uGAIgASgLMhAudGFua2lvLlBvc2l0aW9uIi0KB1NfRW50",
             "ZXISIgoGcGxheWVyGAEgASgLMhIudGFua2lvLlBsYXllckluZm8qgAEKBU1T",
@@ -41,7 +41,7 @@ namespace GGM.Proto.Tank {
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::GGM.Proto.Tank.MSGID), }, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::GGM.Proto.Tank.Position), global::GGM.Proto.Tank.Position.Parser, new[]{ "Rotate", "X", "Y", "TurretRotate" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GGM.Proto.Tank.PlayerInfo), global::GGM.Proto.Tank.PlayerInfo.Parser, new[]{ "PlayerId", "Name", "Position" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::GGM.Proto.Tank.S_init), global::GGM.Proto.Tank.S_init.Parser, new[]{ "PlayerId", "SpawnPosition" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::GGM.Proto.Tank.S_Init), global::GGM.Proto.Tank.S_Init.Parser, new[]{ "PlayerId", "SpawnPosition" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GGM.Proto.Tank.C_Enter), global::GGM.Proto.Tank.C_Enter.Parser, new[]{ "Name", "Position" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::GGM.Proto.Tank.S_Enter), global::GGM.Proto.Tank.S_Enter.Parser, new[]{ "Player" }, null, null, null, null)
           }));
@@ -643,16 +643,16 @@ namespace GGM.Proto.Tank {
   /// <summary>
   ///when client connected to server
   /// </summary>
-  public sealed partial class S_init : pb::IMessage<S_init>
+  public sealed partial class S_Init : pb::IMessage<S_Init>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<S_init> _parser = new pb::MessageParser<S_init>(() => new S_init());
+    private static readonly pb::MessageParser<S_Init> _parser = new pb::MessageParser<S_Init>(() => new S_Init());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<S_init> Parser { get { return _parser; } }
+    public static pb::MessageParser<S_Init> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -668,7 +668,7 @@ namespace GGM.Proto.Tank {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public S_init() {
+    public S_Init() {
       OnConstruction();
     }
 
@@ -676,7 +676,7 @@ namespace GGM.Proto.Tank {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public S_init(S_init other) : this() {
+    public S_Init(S_Init other) : this() {
       playerId_ = other.playerId_;
       spawnPosition_ = other.spawnPosition_ != null ? other.spawnPosition_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -684,8 +684,8 @@ namespace GGM.Proto.Tank {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public S_init Clone() {
-      return new S_init(this);
+    public S_Init Clone() {
+      return new S_Init(this);
     }
 
     /// <summary>Field number for the "playerId" field.</summary>
@@ -715,12 +715,12 @@ namespace GGM.Proto.Tank {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as S_init);
+      return Equals(other as S_Init);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(S_init other) {
+    public bool Equals(S_Init other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -806,7 +806,7 @@ namespace GGM.Proto.Tank {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(S_init other) {
+    public void MergeFrom(S_Init other) {
       if (other == null) {
         return;
       }

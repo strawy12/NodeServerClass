@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private string _connectionUrl;
 
+    [SerializeField]
+    private TankController tankPrefab;
+
     public static GameManager Instance;
 
     private void Awake()
@@ -25,6 +28,17 @@ public class GameManager : MonoBehaviour
     private void OnDestroy()
     {
         NetworkManager.Instance.Disconnect();
+    }
+
+    public void CreateTank(int id, Position position)
+    {
+        TankController tank = Instantiate(tankPrefab);
+
+        tank.GetComponent<NetworkObject>().id = id;
+
+        tank.transform.position = new Vector3(position.X, position.Y, 0);
+        tank.transform.rotation = Quaternion.Euler(0, 0, position.Rotate);
+        tank.TankTurret.rotation = Quaternion.Euler(0, 0, position.TurretRotate);
     }
 
 }

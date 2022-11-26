@@ -10,7 +10,7 @@ public class MapDataExtractor
 {
     // % = ctrl, # = shift, & alt
     [MenuItem("Tools/ExtractMap %&e")] 
-    private static void ExtractMapData()
+    public static void ExtractMapData()
     {
         GameObject tilemap = GameObject.Find("Tilemap");
 

@@ -10,5 +10,9 @@
 <engine:Box name="menu-box"> 
     <engine:Button name="generate-map" text="맵 데이터 생성"/>
     <engine:Button name="build-player" text="빌드본 생성"/>
-</engine:Box>
+
+</engine:Box> 
+<engine:Box name="build-box">  
+        <engine:SliderInt name="build-player-count" low-value="1" high-value="5" label="빌드본 갯수" show-input-field="true"/>
+</engine:Box> 
 </engine:UXML>

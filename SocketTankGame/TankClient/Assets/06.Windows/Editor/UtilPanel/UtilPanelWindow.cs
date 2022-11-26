@@ -33,14 +33,14 @@ public class UtilPanelWindow : EditorWindow
 
     public void GenerateMap()
     {
-        Debug.Log("¸Ê»ý¼º");
+        MapDataExtractor.ExtractMapData();
     }
-
     public void BuildPlayer()
     {
         EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Standalone, BuildTarget.StandaloneWindows);
+        SliderInt slider = rootVisualElement.Q<SliderInt>("build-player-count");
 
-        for(int i = 1; i <= 2; i++)
+        for (int i = 1; i <= slider.value; i++)
         {
             BuildPipeline.BuildPlayer(
                 GetScenePaths(), 

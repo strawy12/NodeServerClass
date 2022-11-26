@@ -1,10 +1,11 @@
-//import { CPositionHandler } from "./packet/CPositionHandler";
+import { CEnterHandler } from "./packet/CEnterHandler";
 import { tankio } from "./packet/packet";
 import { PacketHandler } from "./packet/packetHandler";
 
 interface HandlerDictionary {
     [key: number]: PacketHandler
 }
+
 
 export default class PacketManager {
     static Instance: PacketManager;
@@ -17,6 +18,6 @@ export default class PacketManager {
     }
 
     register(): void {
-       // this.handlerMap[tankio.MSGID.C_POS] = new CPositionHandler();
+       this.handlerMap[tankio.MSGID.C_ENTER] = new CEnterHandler();
     };
     }

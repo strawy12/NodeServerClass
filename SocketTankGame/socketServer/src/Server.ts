@@ -40,7 +40,7 @@ socketServer.on("connection", (soc: WS.WebSocket, req: IncomingMessage) => {
     console.log(`${ip}에서 ${id} 플레이어 접속함`);
 
     let spawnPos:tankio.Position = MapManager.Instance.getRandomSafePosition();
-    let welcomeMsg = new tankio.S_init({playerId:id, spawnPosition:spawnPos});
+    let welcomeMsg = new tankio.S_Init({playerId:id, spawnPosition:spawnPos});
     session.sendData(welcomeMsg.serialize(), tankio.MSGID.S_INIT);
 
     playerID++;

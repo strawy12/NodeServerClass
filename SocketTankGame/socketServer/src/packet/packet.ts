@@ -268,7 +268,7 @@ export namespace tankio {
             return PlayerInfo.deserialize(bytes);
         }
     }
-    export class S_init extends pb_1.Message {
+    export class S_Init extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             playerId?: number;
@@ -303,8 +303,8 @@ export namespace tankio {
         static fromObject(data: {
             playerId?: number;
             spawnPosition?: ReturnType<typeof Position.prototype.toObject>;
-        }): S_init {
-            const message = new S_init({});
+        }): S_Init {
+            const message = new S_Init({});
             if (data.playerId != null) {
                 message.playerId = data.playerId;
             }
@@ -337,8 +337,8 @@ export namespace tankio {
             if (!w)
                 return writer.getResultBuffer();
         }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): S_init {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new S_init();
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): S_Init {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new S_Init();
             while (reader.nextField()) {
                 if (reader.isEndGroup())
                     break;
@@ -357,8 +357,8 @@ export namespace tankio {
         serializeBinary(): Uint8Array {
             return this.serialize();
         }
-        static deserializeBinary(bytes: Uint8Array): S_init {
-            return S_init.deserialize(bytes);
+        static deserializeBinary(bytes: Uint8Array): S_Init {
+            return S_Init.deserialize(bytes);
         }
     }
     export class C_Enter extends pb_1.Message {

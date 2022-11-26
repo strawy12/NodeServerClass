@@ -32,7 +32,7 @@ message PlayerInfo
 }
 
 //when client connected to server
-message S_init
+message S_Init
 {
     int32 playerId = 1;
     Position spawnPosition = 2;
