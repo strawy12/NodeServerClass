@@ -25,6 +25,15 @@ public class PacketManager
     {
        _OnRecv.Add((ushort)MSGID.SInit, MakePacket<S_Init>);
         _Handlers.Add((ushort)MSGID.SInit, new SInitHandler());
+
+        _OnRecv.Add((ushort)MSGID.SEnter, MakePacket<S_Enter>);
+        _Handlers.Add((ushort)MSGID.SEnter, new SEnterHandler());
+
+        _OnRecv.Add((ushort)MSGID.SInitlist, MakePacket<S_InitList>);
+        _Handlers.Add((ushort)MSGID.SInitlist, new SInitListHandler());
+
+        _OnRecv.Add((ushort)MSGID.SPlayerlist, MakePacket<S_PlayerList>);
+        _Handlers.Add((ushort)MSGID.SPlayerlist, new SPlayerListHandler());
     }
 
     public IPacketHandler GetPacketHandler(ushort id)

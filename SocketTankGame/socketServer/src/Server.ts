@@ -7,6 +7,7 @@ import MapManager from "./MapManager";
 import PacketManager from "./PacketManager";
 import SocketSession from "./socketSession";
 import SessionManager from "./SessionManager";
+import JobTimer from "./JobTimer";
 
 
 const App: Application = Express();
@@ -51,5 +52,12 @@ socketServer.on("connection", (soc: WS.WebSocket, req: IncomingMessage) => {
             session.recieveMsg(data);
     });
 
+    let moveTimer = new JobTimer(40, ()=>{
+        let list = SessionManager.Instance.getPlayerList();
+        let data = new tankio.S_PlayerList({players:list});
+        SessionManager.Instance.BroadCastMessage(data.serialize(),tankio.MSGID.S_PLAYERLIST);
 
+    });
+
+    moveTimer.startTimer();
 });

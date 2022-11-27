@@ -1,3 +1,4 @@
+using Cinemachine;
 using GGM.Proto.Tank;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,6 +15,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private TankController tankPrefab;
 
+    private TankController _player = null;
+    public TankController Player => _player;
+
+    private CinemachineVirtualCamera _cmVcam;
+
     public static GameManager Instance;
 
     private void Awake()
@@ -23,22 +29,33 @@ public class GameManager : MonoBehaviour
         NetworkManager.Instance = gameObject.AddComponent<NetworkManager>();
         NetworkManager.Instance.Init(_connectionUrl);
         NetworkManager.Instance.Connection();
+
+        TankManager.Instance = new TankManager();
+
+        _cmVcam = GameObject.Find("FollowCam").GetComponent<CinemachineVirtualCamera>();
+    }
+    public TankController SpawnTank(Vector3 pos, int playerId, bool isPlayer = false)
+    {
+        TankController tank = Instantiate(tankPrefab, pos, Quaternion.identity);
+        tank.SetUp(isPlayer, playerId);
+
+        if(isPlayer)
+        {
+            _player = tank;
+            _cmVcam.m_Follow = _player.transform;
+        }
+
+        else
+        {
+            TankManager.Instance.AddRemoteTank(tank);
+        }
+
+        return tank;
     }
 
     private void OnDestroy()
     {
         NetworkManager.Instance.Disconnect();
-    }
-
-    public void CreateTank(int id, Position position)
-    {
-        TankController tank = Instantiate(tankPrefab);
-
-        tank.GetComponent<NetworkObject>().id = id;
-
-        tank.transform.position = new Vector3(position.X, position.Y, 0);
-        tank.transform.rotation = Quaternion.Euler(0, 0, position.Rotate);
-        tank.TankTurret.rotation = Quaternion.Euler(0, 0, position.TurretRotate);
     }
 
 }

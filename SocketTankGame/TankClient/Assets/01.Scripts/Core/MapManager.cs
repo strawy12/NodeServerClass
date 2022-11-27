@@ -32,6 +32,12 @@ public class MapManager
         return _mainMap.WorldToCell(worldPos);
     }
 
+    public Vector3 GetWorldPos(Vector3Int tilePos)
+    {
+        return _mainMap.CellToWorld(tilePos);
+    }
+
+
     public MapCategory GetTileCategory(Vector3Int tilePos)
     {
         TileBase tile = _collisionMap.GetTile(tilePos);

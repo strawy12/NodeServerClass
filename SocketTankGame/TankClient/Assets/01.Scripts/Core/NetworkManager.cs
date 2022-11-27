@@ -23,6 +23,8 @@ public class NetworkManager : MonoBehaviour
 
     private bool _isReadyToSend = true;
 
+    public int SessionId;
+
     public void Init(string url)
     {
         _url = url;
@@ -48,7 +50,6 @@ public class NetworkManager : MonoBehaviour
                 else
                 {
                     Debug.LogError($"¿¡·¯ ({pmsg.Id})");
-
                 }
             }
         }
@@ -124,10 +125,11 @@ public class NetworkManager : MonoBehaviour
             try
             {
                 WebSocketReceiveResult result =
-                    await _socket.ReceiveAsync(_recvBuffer.WriteSsegment, CancellationToken.None);
+                    await _socket.ReceiveAsync(_recvBuffer.WriteSegment, CancellationToken.None);
 
                 if (result.MessageType == WebSocketMessageType.Binary)
                 {
+                    Debug.Log(result.Count);
                     if (result.EndOfMessage == true)
                     {
                         _recvBuffer.OnWrite(result.Count);
@@ -144,6 +146,7 @@ public class NetworkManager : MonoBehaviour
 
                     else
                     {
+                        
                         _recvBuffer.OnWrite(result.Count);
                     }
                 }

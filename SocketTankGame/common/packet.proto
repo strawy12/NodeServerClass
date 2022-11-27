@@ -50,3 +50,18 @@ message S_Enter
 {
     PlayerInfo player = 1;
 }
+message C_Move
+{
+    int32 playerID = 1;
+    Position position = 2;
+}
+
+message S_PlayerList
+{
+    repeated PlayerInfo players = 1;
+}
+
+message S_InitList
+{
+    repeated PlayerInfo players = 1;
+}

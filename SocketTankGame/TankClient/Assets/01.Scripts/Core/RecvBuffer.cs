@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class RecvBuffer
@@ -16,34 +15,24 @@ public class RecvBuffer
     }
 
     public int DataSize => _writePos - _readPos;
-    public int FreeSize => _buffer.Count - -_writePos;
+    public int FreeSize => _buffer.Count - _writePos;
 
     public ArraySegment<byte> ReadSegment
-    {
-        get
-        {
-            return new ArraySegment<byte>(_buffer.Array, _buffer.Offset + _readPos, DataSize);
-        }
-    }
+        => new ArraySegment<byte>(_buffer.Array, _buffer.Offset + _readPos, DataSize);
 
-    public ArraySegment<byte> WriteSsegment
-    {
-        get
-        {
-            return new ArraySegment<byte>(_buffer.Array, _buffer.Offset + _writePos, FreeSize);
-        }
-    }
+    public ArraySegment<byte> WriteSegment
+        => new ArraySegment<byte>(_buffer.Array, _buffer.Offset + _writePos, FreeSize);
 
     public void Clean()
     {
         int dataSize = DataSize;
-        if(dataSize == 0)
+        if (dataSize == 0)
         {
             _readPos = _writePos = 0;
         }
-
         else
         {
+            //이 경우는 서버만
             Array.Copy(_buffer.Array, _buffer.Offset + _readPos, _buffer.Array, _buffer.Offset, dataSize);
             _readPos = 0;
             _writePos = dataSize;
@@ -61,13 +50,11 @@ public class RecvBuffer
 
     public bool OnWrite(int numOfByte)
     {
-        if(numOfByte > FreeSize)
+        if (numOfByte > FreeSize)
         {
             return false;
         }
-
         _writePos += numOfByte;
         return true;
     }
-
 }

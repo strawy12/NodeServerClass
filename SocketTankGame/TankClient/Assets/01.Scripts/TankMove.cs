@@ -10,6 +10,9 @@ public class TankMove : MonoBehaviour
 
     private TankController _controller;
 
+    private Vector3 _targetPos;
+    private Quaternion _targetRot;
+
     public void Init(TankController ctrl)
     {
         _controller = ctrl;
@@ -34,7 +37,7 @@ public class TankMove : MonoBehaviour
         }
 
         _controller.TankBody.rotation *= Quaternion.Euler(0, 0, angle);
-    } 
+    }
 
     private void CheckMove()
     {
@@ -65,4 +68,21 @@ public class TankMove : MonoBehaviour
         _controller.Rigidbody.velocity = Vector2.zero;
     }
 
+    public void SetPositionAndRotation(Vector3 pos, Quaternion rot)
+    {
+        _targetPos = pos;
+        _targetRot = rot;
+    }
+
+    private void Update()
+    {
+        if (_controller.isRemote)
+        {
+            Vector3 pos = Vector3.Lerp(transform.position, _targetPos, Time.deltaTime * 15);
+            Quaternion rot = Quaternion.Lerp(_controller.TankBody.rotation, _targetRot, Time.deltaTime * 15);
+
+            transform.position = pos;
+            _controller.TankBody.rotation = rot;
+        }
+    }
 }

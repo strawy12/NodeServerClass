@@ -1,4 +1,5 @@
 import WebSocket, {RawData} from "ws";
+import { tankio } from "./packet/packet";
 import PacketManager from "./PacketManager";
 
 
@@ -8,6 +9,12 @@ export default class SocketSession
     socket:WebSocket;
     ipAddress:string;
     playerID:number;
+    
+    name:string = "unknown";
+    isEnter:boolean = false;
+    beforePos:tankio.Position = new tankio.Position({x:0,y:0,rotate:0});
+    pos:tankio.Position = new tankio.Position({x:0,y:0,rotate:0});
+    nesxPos:tankio.Position = new tankio.Position({x:0,y:0,rotate:0});
 
 
     constructor(socket:WebSocket, ipAddress:string, playerID:number, closeCallback:Function)
