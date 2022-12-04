@@ -32,17 +32,13 @@ public class TankController : NetworkObject
 
         _turretController = GetComponent<TurretController>();
 
-    }
-
-    private void Start()
-    {
         _tankMove.Init(this);
         _turretController.Init(this);
-    }  
+    }
 
     private void Update()
     {
-        if(isRemote == false)
+        if (isRemote == false)
         {
             _tankMove.CheckInput();
             _turretController.CheckInput();
@@ -56,7 +52,7 @@ public class TankController : NetworkObject
 
         id = playerId;
 
-        if(isRemote == false)
+        if (isRemote == false)
         {
             StartCoroutine(SendPositionAndRotation());
         }
@@ -64,7 +60,7 @@ public class TankController : NetworkObject
 
     private IEnumerator SendPositionAndRotation()
     {
-        while(gameObject.activeSelf)
+        while (gameObject.activeSelf)
         {
             yield return new WaitForSeconds(0.04f); // 초당 25번
 
@@ -78,7 +74,7 @@ public class TankController : NetworkObject
 
             NetworkManager.Instance.RegisterSend((ushort)MSGID.CMove, cMove);
 
-        }    
+        }
     }
 
     public void OnFire(Vector2 pos, Vector2 dir, bool isEnemy, int fireId)
@@ -89,5 +85,21 @@ public class TankController : NetworkObject
     public void SetPositionAndRotation(PosAndRot data)
     {
         _tankMove.SetPositionAndRotation(data.pos, data.rot);
+
+        if (isRemote)
+        {
+            Debug.Log(11);
+        }
+        _turretController.SetTurretRotation(data.turretRot);
+    }
+
+    public void SetDamage(int damage)
+    {
+        Debug.Log($"{damage} 를 입었습니다.");
+    }
+
+    public void DestroyTank()
+    {
+        Debug.Log("탱크가 파괴됩니다");
     }
 }

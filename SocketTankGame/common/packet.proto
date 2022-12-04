@@ -14,6 +14,8 @@ enum MSGID
    S_LEAVE = 6;
    C_FIRE = 7;
    S_FIRE = 8;
+   C_HIT_REPORT = 9;
+   S_HIT_CONFIRM = 10;
 }
 
 message Position
@@ -85,4 +87,24 @@ message S_Fire
     float z = 5;
     float dirX = 6;
     float dirY = 7;
+}
+
+message C_Hit_Report
+{
+    int32 playerId = 1;
+    int32 fireId = 2;
+    float x = 3;
+    float y = 4;
+    int32 damage = 5;
+}
+
+message S_Hit_Confirm
+{
+    int32 playerId = 1;
+    int32 fireId = 2;
+    float x = 3;
+    float y = 4;
+    int32 damage = 5;
+    bool isCritical = 6;
+    bool isIgnore = 7;
 }

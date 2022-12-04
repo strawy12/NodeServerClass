@@ -1,6 +1,7 @@
 using GGM.Proto.Tank;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class TurretController : MonoBehaviour
@@ -16,6 +17,11 @@ public class TurretController : MonoBehaviour
 
     [SerializeField]
     private int _bulletPower = 10;
+
+    [SerializeField]
+    private float _coolTime = 1f;
+
+    private float _lastFireTime = 0f;
 
     public void Init(TankController ctrl)
     {
@@ -41,6 +47,13 @@ public class TurretController : MonoBehaviour
 
     private void TryToFire()
     {
+            Debug.Log(22);
+        if(_lastFireTime + _coolTime > Time.time)
+        {
+            Debug.Log(11);
+            return;
+        }
+
         Vector3 firePos = _firePos.position;
         Vector3 direction = _firePos.up;
 
@@ -63,8 +76,10 @@ public class TurretController : MonoBehaviour
         b.Id = fireId;
         b.IsEnemy = isEnemy;
         b.SetPosition(pos);
+        b.gameObject.SetActive(true);
         b.Fire(dir, _firePower, _bulletPower);
 
+        _lastFireTime = Time.time;
         GameManager.Instance.AddActiveBullet(fireId, b);
     }
 

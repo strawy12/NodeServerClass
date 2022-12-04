@@ -37,6 +37,9 @@ public class PacketManager
 
         _OnRecv.Add((ushort)MSGID.SFire, MakePacket<S_Fire>);
         _Handlers.Add((ushort)MSGID.SFire, new SFireHandler());
+
+        _OnRecv.Add((ushort)MSGID.SHitConfirm, MakePacket<S_Hit_Confirm>);
+        _Handlers.Add((ushort)MSGID.SHitConfirm, new SHitConfirmHandler());
     }
 
     public IPacketHandler GetPacketHandler(ushort id)

@@ -71,4 +71,17 @@ export default class MapManager
 
         return pos;
     }
+
+    getWorldToTile(pos:Pos) : Pos
+    {
+        let x = Math.floor(pos.x);
+        let y = Math.floor(pos.y);
+        return {x,y};
+    }
+
+    IsSafeZone(worldPos : Pos) : boolean
+    {
+        let {x, y} = this.getWorldToTile(worldPos);
+        return this.getMapData(x,y) == MapCategory.SAFEZONE;
+    }
 }
