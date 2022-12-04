@@ -129,7 +129,6 @@ public class NetworkManager : MonoBehaviour
 
                 if (result.MessageType == WebSocketMessageType.Binary)
                 {
-                    Debug.Log(result.Count);
                     if (result.EndOfMessage == true)
                     {
                         _recvBuffer.OnWrite(result.Count);
@@ -146,7 +145,6 @@ public class NetworkManager : MonoBehaviour
 
                     else
                     {
-                        
                         _recvBuffer.OnWrite(result.Count);
                     }
                 }

@@ -20,7 +20,7 @@ public class UtilPanelWindow : EditorWindow
         VisualTreeAsset xml = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/06.Windows/Editor/UtilPanel/UtilPanelWindow.uxml");
          
         TemplateContainer tree = xml.CloneTree();
-        rootVisualElement.Add(tree); 
+        rootVisualElement.Add(tree);  
 
         //StyleSheet uss = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/06.Windows/Editor/UtilPanel/UtilPanelWindow.uss");
         //rootVisualElement.styleSheets.Add(uss); 

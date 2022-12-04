@@ -34,6 +34,9 @@ public class PacketManager
 
         _OnRecv.Add((ushort)MSGID.SPlayerlist, MakePacket<S_PlayerList>);
         _Handlers.Add((ushort)MSGID.SPlayerlist, new SPlayerListHandler());
+
+        _OnRecv.Add((ushort)MSGID.SFire, MakePacket<S_Fire>);
+        _Handlers.Add((ushort)MSGID.SFire, new SFireHandler());
     }
 
     public IPacketHandler GetPacketHandler(ushort id)

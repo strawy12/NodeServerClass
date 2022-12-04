@@ -1,5 +1,6 @@
 import { CEnterHandler } from "./packet/CEnterHandler";
 import { CMoveHandler } from "./packet/CMoveHandler";
+import { CFireHandler } from "./packet/CFireHandler";
 import { tankio } from "./packet/packet";
 import { PacketHandler } from "./packet/packetHandler";
 
@@ -21,5 +22,6 @@ export default class PacketManager {
     register(): void {
        this.handlerMap[tankio.MSGID.C_ENTER] = new CEnterHandler();
        this.handlerMap[tankio.MSGID.C_MOVE] = new CMoveHandler();
+       this.handlerMap[tankio.MSGID.C_FIRE] = new CFireHandler();
     };
     }

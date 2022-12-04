@@ -65,3 +65,24 @@ message S_InitList
 {
     repeated PlayerInfo players = 1;
 }
+
+message C_Fire
+{
+    int32 playerId = 1;
+    float x = 2;
+    float y = 3;
+    float z = 4;
+    float dirX = 5;
+    float dirY = 6;
+}
+
+message S_Fire
+{
+    int32 playerId = 1;
+    int32 fireId = 2;
+    float x = 3;
+    float y = 4;
+    float z = 5;
+    float dirX = 6;
+    float dirY = 7;
+}

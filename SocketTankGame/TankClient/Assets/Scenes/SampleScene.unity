@@ -8373,6 +8373,8 @@ MonoBehaviour:
   _mainMap: {fileID: 925484099}
   _connectionUrl: ws://localhost:50000
   tankPrefab: {fileID: 4669395784449655733, guid: 8545031b08033ab458b9512e6a87e756, type: 3}
+  _prefabs:
+  - {fileID: 2167826104240137793, guid: 2bcf09e82a46fd6499243081d192fba1, type: 3}
 --- !u!4 &1181637652
 Transform:
   m_ObjectHideFlags: 0

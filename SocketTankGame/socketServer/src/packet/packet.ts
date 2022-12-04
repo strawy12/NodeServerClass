@@ -751,4 +751,391 @@ export namespace tankio {
             return S_InitList.deserialize(bytes);
         }
     }
+    export class C_Fire extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            playerId?: number;
+            x?: number;
+            y?: number;
+            z?: number;
+            dirX?: number;
+            dirY?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("playerId" in data && data.playerId != undefined) {
+                    this.playerId = data.playerId;
+                }
+                if ("x" in data && data.x != undefined) {
+                    this.x = data.x;
+                }
+                if ("y" in data && data.y != undefined) {
+                    this.y = data.y;
+                }
+                if ("z" in data && data.z != undefined) {
+                    this.z = data.z;
+                }
+                if ("dirX" in data && data.dirX != undefined) {
+                    this.dirX = data.dirX;
+                }
+                if ("dirY" in data && data.dirY != undefined) {
+                    this.dirY = data.dirY;
+                }
+            }
+        }
+        get playerId() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set playerId(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get x() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set x(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get y() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set y(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get z() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set z(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get dirX() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set dirX(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get dirY() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set dirY(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        static fromObject(data: {
+            playerId?: number;
+            x?: number;
+            y?: number;
+            z?: number;
+            dirX?: number;
+            dirY?: number;
+        }): C_Fire {
+            const message = new C_Fire({});
+            if (data.playerId != null) {
+                message.playerId = data.playerId;
+            }
+            if (data.x != null) {
+                message.x = data.x;
+            }
+            if (data.y != null) {
+                message.y = data.y;
+            }
+            if (data.z != null) {
+                message.z = data.z;
+            }
+            if (data.dirX != null) {
+                message.dirX = data.dirX;
+            }
+            if (data.dirY != null) {
+                message.dirY = data.dirY;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                playerId?: number;
+                x?: number;
+                y?: number;
+                z?: number;
+                dirX?: number;
+                dirY?: number;
+            } = {};
+            if (this.playerId != null) {
+                data.playerId = this.playerId;
+            }
+            if (this.x != null) {
+                data.x = this.x;
+            }
+            if (this.y != null) {
+                data.y = this.y;
+            }
+            if (this.z != null) {
+                data.z = this.z;
+            }
+            if (this.dirX != null) {
+                data.dirX = this.dirX;
+            }
+            if (this.dirY != null) {
+                data.dirY = this.dirY;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.playerId != 0)
+                writer.writeInt32(1, this.playerId);
+            if (this.x != 0)
+                writer.writeFloat(2, this.x);
+            if (this.y != 0)
+                writer.writeFloat(3, this.y);
+            if (this.z != 0)
+                writer.writeFloat(4, this.z);
+            if (this.dirX != 0)
+                writer.writeFloat(5, this.dirX);
+            if (this.dirY != 0)
+                writer.writeFloat(6, this.dirY);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): C_Fire {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new C_Fire();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.playerId = reader.readInt32();
+                        break;
+                    case 2:
+                        message.x = reader.readFloat();
+                        break;
+                    case 3:
+                        message.y = reader.readFloat();
+                        break;
+                    case 4:
+                        message.z = reader.readFloat();
+                        break;
+                    case 5:
+                        message.dirX = reader.readFloat();
+                        break;
+                    case 6:
+                        message.dirY = reader.readFloat();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): C_Fire {
+            return C_Fire.deserialize(bytes);
+        }
+    }
+    export class S_Fire extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            playerId?: number;
+            fireId?: number;
+            x?: number;
+            y?: number;
+            z?: number;
+            dirX?: number;
+            dirY?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("playerId" in data && data.playerId != undefined) {
+                    this.playerId = data.playerId;
+                }
+                if ("fireId" in data && data.fireId != undefined) {
+                    this.fireId = data.fireId;
+                }
+                if ("x" in data && data.x != undefined) {
+                    this.x = data.x;
+                }
+                if ("y" in data && data.y != undefined) {
+                    this.y = data.y;
+                }
+                if ("z" in data && data.z != undefined) {
+                    this.z = data.z;
+                }
+                if ("dirX" in data && data.dirX != undefined) {
+                    this.dirX = data.dirX;
+                }
+                if ("dirY" in data && data.dirY != undefined) {
+                    this.dirY = data.dirY;
+                }
+            }
+        }
+        get playerId() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set playerId(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get fireId() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set fireId(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get x() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set x(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get y() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set y(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get z() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set z(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get dirX() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set dirX(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get dirY() {
+            return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
+        }
+        set dirY(value: number) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        static fromObject(data: {
+            playerId?: number;
+            fireId?: number;
+            x?: number;
+            y?: number;
+            z?: number;
+            dirX?: number;
+            dirY?: number;
+        }): S_Fire {
+            const message = new S_Fire({});
+            if (data.playerId != null) {
+                message.playerId = data.playerId;
+            }
+            if (data.fireId != null) {
+                message.fireId = data.fireId;
+            }
+            if (data.x != null) {
+                message.x = data.x;
+            }
+            if (data.y != null) {
+                message.y = data.y;
+            }
+            if (data.z != null) {
+                message.z = data.z;
+            }
+            if (data.dirX != null) {
+                message.dirX = data.dirX;
+            }
+            if (data.dirY != null) {
+                message.dirY = data.dirY;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                playerId?: number;
+                fireId?: number;
+                x?: number;
+                y?: number;
+                z?: number;
+                dirX?: number;
+                dirY?: number;
+            } = {};
+            if (this.playerId != null) {
+                data.playerId = this.playerId;
+            }
+            if (this.fireId != null) {
+                data.fireId = this.fireId;
+            }
+            if (this.x != null) {
+                data.x = this.x;
+            }
+            if (this.y != null) {
+                data.y = this.y;
+            }
+            if (this.z != null) {
+                data.z = this.z;
+            }
+            if (this.dirX != null) {
+                data.dirX = this.dirX;
+            }
+            if (this.dirY != null) {
+                data.dirY = this.dirY;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.playerId != 0)
+                writer.writeInt32(1, this.playerId);
+            if (this.fireId != 0)
+                writer.writeInt32(2, this.fireId);
+            if (this.x != 0)
+                writer.writeFloat(3, this.x);
+            if (this.y != 0)
+                writer.writeFloat(4, this.y);
+            if (this.z != 0)
+                writer.writeFloat(5, this.z);
+            if (this.dirX != 0)
+                writer.writeFloat(6, this.dirX);
+            if (this.dirY != 0)
+                writer.writeFloat(7, this.dirY);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): S_Fire {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new S_Fire();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.playerId = reader.readInt32();
+                        break;
+                    case 2:
+                        message.fireId = reader.readInt32();
+                        break;
+                    case 3:
+                        message.x = reader.readFloat();
+                        break;
+                    case 4:
+                        message.y = reader.readFloat();
+                        break;
+                    case 5:
+                        message.z = reader.readFloat();
+                        break;
+                    case 6:
+                        message.dirX = reader.readFloat();
+                        break;
+                    case 7:
+                        message.dirY = reader.readFloat();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): S_Fire {
+            return S_Fire.deserialize(bytes);
+        }
+    }
 }

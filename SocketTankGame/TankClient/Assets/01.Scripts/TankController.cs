@@ -37,6 +37,7 @@ public class TankController : NetworkObject
     private void Start()
     {
         _tankMove.Init(this);
+        _turretController.Init(this);
     }  
 
     private void Update()
@@ -44,6 +45,7 @@ public class TankController : NetworkObject
         if(isRemote == false)
         {
             _tankMove.CheckInput();
+            _turretController.CheckInput();
         }
     }
 
@@ -77,6 +79,11 @@ public class TankController : NetworkObject
             NetworkManager.Instance.RegisterSend((ushort)MSGID.CMove, cMove);
 
         }    
+    }
+
+    public void OnFire(Vector2 pos, Vector2 dir, bool isEnemy, int fireId)
+    {
+        _turretController.Fire(pos, dir, isEnemy, fireId);
     }
 
     public void SetPositionAndRotation(PosAndRot data)
